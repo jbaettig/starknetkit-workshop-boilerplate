@@ -1,10 +1,22 @@
-import React from 'react'
-import { useAccount, useConnect, useDisconnect } from "@starknet-react/core"
+import React from "react";
+import { useAccount, useConnect } from "@starknet-react/core";
 
 function Home() {
+  const { connect, connectors } = useConnect();
+  const { address } = useAccount();
+
   return (
-    <div>Home</div>
-  )
+    <div>
+      <div>Home</div>
+
+      {connectors.map((connector) => (
+        <button onClick={() => connect({ connector })}>
+          Connect {connector.id}
+        </button>
+      ))}
+      {address}
+    </div>
+  );
 }
 
-export default Home
+export default Home;
